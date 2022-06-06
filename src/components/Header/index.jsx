@@ -1,5 +1,5 @@
-import logo from "../../assets/icons/logo.svg"
-import sacola from "../../assets/icons/sacola.svg"
+import logo from "assets/icons/logo.svg"
+import sacola from "assets/icons/sacola.svg"
 import "./style.css"
 
 function Header() {
