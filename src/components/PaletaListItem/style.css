@@ -8,6 +8,7 @@
     justify-content: space-around;
     position: relative;
     transition: all 0.4s;
+    cursor: pointer;
 }
 
 .PaletaListItem:hover {
