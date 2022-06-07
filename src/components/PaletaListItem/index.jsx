@@ -12,9 +12,8 @@ function PaletaListItem({ paleta, amountSelected, index, onRemove, onAdd, clickI
     }}>Remover
         <i className="bi bi-trash"></i></button>);
 
-
     return (
-        <div className="PaletaListItem" onClick={() => clickItem(paleta.id)}>
+        <div className="PaletaListItem" onClick={() => clickItem(paleta._id)}>
             {badgeCounter(amountSelected, index)}
             <div>
                 <div className="PaletaListItemTitulo">{paleta.titulo}</div>

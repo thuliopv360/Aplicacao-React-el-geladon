@@ -14,12 +14,14 @@ const transformPaleta = (paleta) => {
     }
 };
 
-const parseTrensformList = (response) => parseResponse(response).then((paletas) => paletas.map(transformPaleta))
+const parseTransformList = (response) => parseResponse(response).then((paletas) => paletas.map(transformPaleta))
+
+const parseTransformItem = (response) => parseResponse(response).then(transformPaleta)
 
 export const PaletaService = {
-  getList: () => fetch(Api.paletaList(), { method: "GET" }).then(parseTrensformList),
+  getList: () => fetch(Api.paletaList(), { method: "GET" }).then(parseTransformList),
   getById: (id) =>
-    fetch(Api.paletaById(), { method: "GET" }).then(parseResponse),
+    fetch(Api.paletaById(id), { method: "GET" }).then(parseTransformItem),
   create: () =>
     fetch(Api.createPaleta(), { method: "POST" }).then(parseResponse),
   updateById: (id) =>

@@ -11,7 +11,7 @@ function Modal({ children, closeModal }) {
     return (
         <Overlay overlayClick={closeModal}>
             <div className="Modal" onClick={handleClick}>
-                <span className="ModalClose"  onClick={(e) => handleClick(e,true)}><i class="bi bi-x-lg"></i></span>
+                <span className="ModalClose"  onClick={(e) => handleClick(e,true)}><i className="bi bi-x-lg"></i></span>
                 <div className="ModalBody">{children}</div>
             </div>
         </Overlay >
