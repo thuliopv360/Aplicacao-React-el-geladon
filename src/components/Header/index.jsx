@@ -1,8 +1,10 @@
-import logo from "assets/icons/logo.svg"
-import sacola from "assets/icons/sacola.svg"
-import "./style.css"
+import logo from "assets/icons/logo.svg";
+import paleta from "assets/icons/paleta.svg";
+import sacola from "assets/icons/sacola.svg";
+import "./style.css";
 
-function Header() {
+function Header({createPaleta}) {
+
     return (
         <header className="HomeHeader Header">
             <div className="row">
@@ -13,7 +15,12 @@ function Header() {
                     </span>
                 </div>
                 <div className="HeaderOptions Options">
-                    <img src={sacola} alt="Sacola de compras" className="BadgeIcon" width="40px" />
+                    <button type="button" className="OptionsPaleta Paleta" onClick={() => createPaleta()}>
+                        <img src={paleta} alt="Adicionar paleta" width="40px" className="PaletaIcon" />
+                    </button>
+                    <div className="OptionsBadge Badge">
+                        <img src={sacola} alt="Sacola de compras" className="BadgeIcon" width="40px" />
+                    </div>
                 </div>
             </div>
         </header>
