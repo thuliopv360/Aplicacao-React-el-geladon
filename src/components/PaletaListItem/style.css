@@ -26,6 +26,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    width: 100%;
 }
 
 .PaletaListItemTitulo {
@@ -36,6 +37,7 @@
 
 .PaletaListItemDescricao {
     font-size: 0.85em;
+    width: 100%;
 }
 
 .PaletaListItemPreco {
@@ -79,6 +81,49 @@
     height: 150px;
     margin-right: -60px;
 }
+
+.PaletaListItem--disable {
+    box-shadow: 0px 0px 7px rgba(148, 0, 211);
+}
+
+.PaletaListItem--disable,
+.PaletaListItem--disable .PaletaListItemPreco {
+    color: gray;
+}
+
+.PaletaListItem--disable .PaletaListItemBadge {
+    display: none;
+}
+
+.PaletaListItem--disable img {
+    filter: grayscale(100%);
+}
+
+.PaletaListItem--disable button:disabled {
+    background-color: gray;
+}
+
+
+.PaletaListItem:hover {
+    filter: brightness(0.9);
+    color: black;
+}
+.PaletaListItemPreco:hover {
+    color: darkviolet;
+}
+
+.PaletaListItemTag {
+    background-color: darkviolet !important;
+    color: white !important;
+    position: absolute;
+    font-size: 0.6em;
+    border-radius: 5px;
+    padding: 5px;
+    top: -15px;
+    left: -10px;
+    letter-spacing: 1px;
+}
+
 
 .PaletaListItemBadge {
     background-color: greenyellow;

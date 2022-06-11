@@ -1,26 +1,31 @@
+import { ActionMode } from 'constants';
 import './style.css'
 
-
-function PaletaListItem({ paleta, amountSelected, index, onRemove, onAdd, clickItem }) {
+function PaletaListItem({ paleta, amountSelected, index, onRemove, onAdd, clickItem, mode }) {
     // funcao que faz o span aparecer na pagina quando nao esta com 0 items
     const badgeCounter = (canRender, index) => Boolean(canRender) && (<span className="PaletaListItemBadge">{amountSelected}</span>)
 
+    const badgeAction = (canRender) => {
+        if(canRender) return (<span className="PaletaListItemTag"> {mode} </span>)
+    }
+
     // funcao que faz o botao Remover aparecer
-    const removeButton = (canRender, index) => Boolean(canRender) && (<button className="ActionRemove" onClick={(e) => {
+    const removeButton = (canRender, index) => 
+    Boolean(canRender) && (<button disabled={mode !== ActionMode.NORMAL} className="ActionRemove" onClick={(e) => {
         e.stopPropagation();
         onRemove(index);
-    }}>Remover
-        <i className="bi bi-trash"></i></button>);
+    }}>Remover<i className="bi bi-trash"></i></button>);
 
     return (
-        <div className="PaletaListItem" onClick={() => clickItem(paleta._id)}>
+        <div className={`PaletaListItem ${mode !== ActionMode.NORMAL && 'PaletaListItem--disable'}`} onClick={() => clickItem(paleta._id)}>
             {badgeCounter(amountSelected, index)}
+            {badgeAction(mode !== ActionMode.NORMAL)}
             <div>
                 <div className="PaletaListItemTitulo">{paleta.titulo}</div>
                 <div className="PaletaListItemPreco"> R$ {paleta.preco}</div>
                 <div className="PaletaListItemDescricao">{paleta.descricao}</div>
                 <div className="PaletaListItemAction Action">
-                    <button className={`ActionPut ${!amountSelected && "ActionPutFill"}`} onClick={(e) => {
+                    <button disabled={mode !== ActionMode.NORMAL} className={`ActionPut ${!amountSelected && "ActionPutFill"}`} onClick={(e) => {
                         e.stopPropagation();
                         onAdd(index);
                     }}>Adicionar  <i className="bi bi-plus-square"></i></button>

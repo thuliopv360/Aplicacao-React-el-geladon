@@ -22,10 +22,12 @@ export const PaletaService = {
   getList: () => fetch(Api.paletaList(), { method: "GET" }).then(parseTransformList),
   getById: (id) =>
     fetch(Api.paletaById(id), { method: "GET" }).then(parseTransformItem),
-  create: () =>
-    fetch(Api.createPaleta(), { method: "POST" }).then(parseResponse),
-  updateById: (id) =>
-    fetch(Api.updatePaletaById(), { method: "PUT" }).then(parseResponse),
+  create: (paleta) =>
+    fetch(Api.createPaleta(), { method: "POST", body: JSON.stringify(paleta), mode: "cors", headers: {
+      "Content-Type": "application/json"
+    }}).then(parseTransformItem),
+  updateById: (id) => {console.log(id)
+    fetch(Api.updatePaletaById(), { method: "PUT" }).then(parseResponse)},
   deleteById: (id) =>
     fetch(Api.deletePaletaById(), { method: "DELETE" }).then(parseResponse),
 };
