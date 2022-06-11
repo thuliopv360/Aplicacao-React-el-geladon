@@ -25,10 +25,10 @@ function PaletaListItem({ paleta, amountSelected, index, onRemove, onAdd, clickI
                 <div className="PaletaListItemPreco"> R$ {paleta.preco}</div>
                 <div className="PaletaListItemDescricao">{paleta.descricao}</div>
                 <div className="PaletaListItemAction Action">
-                    <button disabled={mode !== ActionMode.NORMAL} className={`ActionPut ${!amountSelected && "ActionPutFill"}`} onClick={(e) => {
+                    <button disabled={mode !== ActionMode.NORMAL} className={`ActionPut ${!amountSelected && "ActionPutFill"} ${mode === ActionMode.ATUALIZAR && 'ButtonAtualizar--disable'}`} onClick={(e) => {
                         e.stopPropagation();
                         onAdd(index);
-                    }}>Adicionar  <i className="bi bi-plus-square"></i></button>
+                    }}>{ActionMode.ATUALIZAR === mode ? 'Atualizar esta Paleta' : 'Adicionar'}  <i className="bi bi-plus-square"></i></button>
                     {removeButton(amountSelected, index)}
                 </div>
             </div>

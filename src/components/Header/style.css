@@ -116,3 +116,7 @@
 .PaletaActive{
   background-color: rgba(148,0,211)
 }
+
+.PaletaDelete{
+  background: rgba(211, 0, 0);
+}

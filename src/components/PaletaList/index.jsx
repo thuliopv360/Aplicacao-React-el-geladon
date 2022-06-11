@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import PaletaDetalhadaModal from 'components/PaletaDetalhadaModal'
 import { ActionMode } from "constants";
 
-function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta }) {
+function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta, editedPaleta }) {
 
     const [paletas, setPaletas] = useState([]);
 
@@ -59,7 +59,12 @@ function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta }) {
 
     useEffect(() => {
         getList();
+      }, [editedPaleta]);
+
+    useEffect(() => {
+        getList();
     }, []);
+
     return (
         <div className="PaletaList">
             {paletas.map((paleta, index) =>

@@ -6,6 +6,7 @@ import "./style.css";
 import { ActionMode } from "constants";
 
 function Home() {
+  const [paletaEdited, setPaletaEdited] = useState();
   const [canShow, setCanShow] = useState(false);
   const [paletaForPut, setPaletaForPut] = useState();
   const [currentMode, setCurrentMode] = useState(ActionMode.NORMAL);
@@ -32,17 +33,22 @@ function Home() {
     setPaletaForPut();
     setPaletaForDelete();
     setPaletaForEdit();
+
+    setCurrentMode(ActionMode.NORMAL);
   }
   return (
     <div className="Home">
       <Header
         mode={currentMode}
-        createPaleta={() => setCanShow(true)} updatePaleta={() => handleActions(ActionMode.ATUALIZAR)}
+        createPaleta={() => setCanShow(true)} 
+        updatePaleta={() => handleActions(ActionMode.ATUALIZAR)}
+        deletePaleta={() => handleActions(ActionMode.DELETAR)}
       />
       <div className="HomeContainer">
         <PaletaList
           mode={currentMode}
           paletaCreated={paletaForPut}
+          editedPaleta={paletaEdited}
           deletePaleta={handleDeletePaleta}
           updatePaleta={handleUpdatePaleta}
         />
@@ -52,6 +58,7 @@ function Home() {
             paletaToUpdate={paletaForEdit}
             closeModal={handleCloseModal}
             onCreatePaleta={(paleta) => setPaletaForPut(paleta)}
+            onUpdatePaleta={(paleta) => setPaletaEdited(paleta)}
           />)
         }
       </div>

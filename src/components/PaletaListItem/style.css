@@ -103,11 +103,12 @@
     background-color: gray;
 }
 
-
 .PaletaListItem:hover {
     filter: brightness(0.9);
+    background-color: initial;
     color: black;
 }
+
 .PaletaListItemPreco:hover {
     color: darkviolet;
 }
@@ -140,4 +141,9 @@
     border-radius: 50%;
     top: -9px;
     left: -9px;
+}
+
+
+.ButtonAtualizar--disable:hover{
+    color: rgb(211, 160, 233);
 }

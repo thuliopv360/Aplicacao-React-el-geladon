@@ -38,7 +38,7 @@ function PutAndEditPaletaModal({ closeModal, onCreatePaleta, mode, paletaToUpdat
 
 
     const handleSend = async () => {
-        const renamePath = (fotoPath) => fotoPath.split('/\\|\//').pop();
+        const renamePath = (fotoPath) => fotoPath.split(/\\|\//).pop();
 
         const { sabor, recheio, descricao, preco, foto } = state;
 
