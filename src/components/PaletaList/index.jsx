@@ -7,16 +7,32 @@ import { ActionMode } from "constants";
 
 function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta, editedPaleta }) {
 
+    const selecionadas = JSON.parse(localStorage.getItem('selecionadas')) ?? {};
+
     const [paletas, setPaletas] = useState([]);
 
-    const [paletaSelecionada, setPaletaSelecionada] = useState({});
+    const [paletaSelecionada, setPaletaSelecionada] = useState(selecionadas);
 
     const [paletaModal, setPaletaModal] = useState(false);
 
     const putItem = (paletaIndex) => {
-        const paleta = { [paletaIndex]: Number(paletaSelecionada[paletaIndex] || 0) + 1 };
-        setPaletaSelecionada({ ...paletaSelecionada, ...paleta });
-    }
+        const paleta = { [paletaIndex]: (paletaSelecionada[paletaIndex] || 0) +1 }
+        setPaletaSelecionada({ ...paletaSelecionada, ...paleta});
+      }
+
+    const setSelecionadas = useCallback(() => {
+        if(!paletas.length) return
+    
+        const entries = Object.entries(paletaSelecionada);
+        const sacola = entries.map(arr => ({
+          paletaId: paletas[arr[0]].id,
+          quantidade: arr[1]
+        }))
+    
+        localStorage.setItem('sacola', JSON.stringify(sacola))
+        localStorage.setItem('selecionadas', JSON.stringify(paletaSelecionada))
+      }, [ paletaSelecionada, paletas ])
+
 
     const deleteItem = (paletaIndex) => {
         const paleta = { [paletaIndex]: Number(paletaSelecionada[paletaIndex] || 0) - 1 };
@@ -59,11 +75,11 @@ function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta, editedPal
 
     useEffect(() => {
         getList();
-      }, [editedPaleta]);
+    }, [editedPaleta, deletePaleta]);
 
     useEffect(() => {
-        getList();
-    }, []);
+        setSelecionadas();
+      }, [ setSelecionadas, paletaSelecionada ]);
 
     return (
         <div className="PaletaList">

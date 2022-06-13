@@ -66,18 +66,14 @@ function PutAndEditPaletaModal({ closeModal, onCreatePaleta, mode, paletaToUpdat
         actionResponse[mode]();
 
         const reset = {
-            preco: "",
-            sabor: "",
-            recheio: "",
-            descricao: "",
-            foto: ""
+            preco: '',
+            sabor: '',
+            recheio: '',
+            descricao: '',
+            foto: ''
         }
-
         setState(reset);
-
         closeModal();
-        console.log("Ola")
-
     }
     return (
         <Modal

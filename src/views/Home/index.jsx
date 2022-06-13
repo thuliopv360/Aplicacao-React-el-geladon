@@ -1,11 +1,14 @@
-import { useState } from "react";
-import Header from "components/Header";
-import PaletaList from "components/PaletaList";
-import PutAndEditPaletaModal from "components/PutAndEditPaletaModal";
 import "./style.css";
 import { ActionMode } from "constants";
+import { useState } from "react";
+import PaletaList from "components/PaletaList";
+import Header from "components/Header";
+import PutAndEditPaletaModal from "components/PutAndEditPaletaModal";
+import { SacolaService } from "services/SacolaService";
+import SacolaModal from "components/SacolaModal";
 
 function Home() {
+  const [canOpenBag, setCanOpenBag] = useState();
   const [paletaEdited, setPaletaEdited] = useState();
   const [canShow, setCanShow] = useState(false);
   const [paletaForPut, setPaletaForPut] = useState();
@@ -36,6 +39,17 @@ function Home() {
 
     setCurrentMode(ActionMode.NORMAL);
   }
+  
+  const abrirSacola = async () => {
+    const lista = JSON.parse(localStorage.getItem('sacola'));
+    const sacola = lista.filter(i => i.quantidade > 0);
+  
+    await SacolaService.create(sacola)
+  
+    setCanOpenBag(true)
+  }
+  
+
   return (
     <div className="Home">
       <Header
@@ -43,6 +57,7 @@ function Home() {
         createPaleta={() => setCanShow(true)} 
         updatePaleta={() => handleActions(ActionMode.ATUALIZAR)}
         deletePaleta={() => handleActions(ActionMode.DELETAR)}
+        openBag={abrirSacola}
       />
       <div className="HomeContainer">
         <PaletaList
@@ -60,6 +75,10 @@ function Home() {
             onCreatePaleta={(paleta) => setPaletaForPut(paleta)}
             onUpdatePaleta={(paleta) => setPaletaEdited(paleta)}
           />)
+        }
+        {
+          canOpenBag &&
+          <SacolaModal closeModal={() => setCanOpenBag(false)}/>
         }
       </div>
     </div>
