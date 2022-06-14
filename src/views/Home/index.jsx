@@ -6,11 +6,13 @@ import Header from "components/Header";
 import PutAndEditPaletaModal from "components/PutAndEditPaletaModal";
 import { SacolaService } from "services/SacolaService";
 import SacolaModal from "components/SacolaModal";
+import DeletePaletaModal from "components/DeletePaletaModal";
 
 function Home() {
   const [canOpenBag, setCanOpenBag] = useState();
   const [paletaEdited, setPaletaEdited] = useState();
   const [canShow, setCanShow] = useState(false);
+  const [paletaRemoved, setPaletaRemoved] = useState();
   const [paletaForPut, setPaletaForPut] = useState();
   const [currentMode, setCurrentMode] = useState(ActionMode.NORMAL);
 
@@ -39,22 +41,22 @@ function Home() {
 
     setCurrentMode(ActionMode.NORMAL);
   }
-  
+
   const abrirSacola = async () => {
     const lista = JSON.parse(localStorage.getItem('sacola'));
     const sacola = lista.filter(i => i.quantidade > 0);
-  
+
     await SacolaService.create(sacola)
-  
+
     setCanOpenBag(true)
   }
-  
+
 
   return (
     <div className="Home">
       <Header
         mode={currentMode}
-        createPaleta={() => setCanShow(true)} 
+        createPaleta={() => setCanShow(true)}
         updatePaleta={() => handleActions(ActionMode.ATUALIZAR)}
         deletePaleta={() => handleActions(ActionMode.DELETAR)}
         openBag={abrirSacola}
@@ -64,6 +66,7 @@ function Home() {
           mode={currentMode}
           paletaCreated={paletaForPut}
           editedPaleta={paletaEdited}
+          paletaRemoved={paletaRemoved}
           deletePaleta={handleDeletePaleta}
           updatePaleta={handleUpdatePaleta}
         />
@@ -77,8 +80,16 @@ function Home() {
           />)
         }
         {
+          paletaForDelete &&
+          <DeletePaletaModal
+            paletaParaDeletar={paletaForDelete}
+            closeModal={handleCloseModal}
+            onDeletePaleta={(paleta) => setPaletaRemoved(paleta)}
+          />
+        }
+        {
           canOpenBag &&
-          <SacolaModal closeModal={() => setCanOpenBag(false)}/>
+          <SacolaModal closeModal={() => setCanOpenBag(false)} />
         }
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from 'react';
 import PaletaDetalhadaModal from 'components/PaletaDetalhadaModal'
 import { ActionMode } from "constants";
 
-function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta, editedPaleta }) {
+function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta, editedPaleta, paletaRemoved }) {
 
     const selecionadas = JSON.parse(localStorage.getItem('selecionadas')) ?? {};
 
@@ -75,7 +75,7 @@ function PaletaList({ paletaCreated, mode, updatePaleta, deletePaleta, editedPal
 
     useEffect(() => {
         getList();
-    }, [editedPaleta, deletePaleta]);
+    }, [editedPaleta, paletaRemoved]);
 
     useEffect(() => {
         setSelecionadas();

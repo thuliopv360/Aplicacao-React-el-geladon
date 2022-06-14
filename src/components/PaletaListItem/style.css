@@ -109,7 +109,7 @@
 
 .PaletaListItem:hover {
     filter: brightness(0.9);
-    background-color: initial;
+    background-color: rgb(121, 224, 244);
     color: black;
 }
 
